@@ -2,6 +2,8 @@
 
 This is a [Django](http://www.djangoproject.com) project that you can use as the starting point to develop your own and deploy it on an [OpenShift](https://github.com/openshift/origin) cluster.
 
+**NOTE:** This version contains obsolete Django 1.11.x LTS which works with RHEL/Centos 7 and Python 2. Consider switching to RHEL/Centos 8 and Python 3 with Django 2.2.x LTS in [branch 2.2.x](https://github.com/sclorg/django-ex/tree/2.2.x).
+
 The steps in this document assume that you have access to an OpenShift deployment that you can deploy applications on.
 
 ## What has been done for you
@@ -44,7 +46,7 @@ The sample application code and templates in this repository contain database co
 
 ### Automatic test execution
 
-The sample application code and templates in this repository contain scripts that automatically execute tests via the postCommit hook.  These tests assume that they are being executed against a local test sqlite database. If alternate database credentials are supplied to the build, the tests could make undesireable changes to that database.
+The sample application code and templates in this repository contain scripts that automatically execute tests via the postCommit hook.  These tests assume that they are being executed against a local test sqlite database. If alternate database credentials are supplied to the build, the tests could make undesirable changes to that database.
 
 ## Local development
 
@@ -59,7 +61,7 @@ To run this project in your development machine, follow these steps:
 
 3. Fork this repo and clone your fork:
 
-    `git clone https://github.com/openshift/django-ex.git`
+    `git clone https://github.com/sclorg/django-ex.git`
 
 4. Install dependencies:
 
@@ -95,7 +97,7 @@ After adding your templates, you can go to your OpenShift web console, browse to
 
 Adjust the parameter values to suit your configuration. Most times you can just accept the default values, however you will probably want to set the `GIT_REPOSITORY` parameter to point to your fork and the `DATABASE_*` parameters to match your database configuration.
 
-Alternatively, you can use the command line to create your new app, assuming your OpenShift deployment has the default set of ImageStreams defined.  Instructions for installing the default ImageStreams are available [here](https://docs.openshift.org/latest/install_config/imagestreams_templates.html).  If you are defining the set of ImageStreams now, remember to pass in the proper cluster-admin credentials and to create the ImageStreams in the 'openshift' namespace:
+Alternatively, you can use the command line to create your new app, assuming your OpenShift deployment has the default set of ImageStreams defined.  Instructions for installing the default ImageStreams are available [here](https://docs.okd.io/latest/install_config/imagestreams_templates.html).  If you are defining the set of ImageStreams now, remember to pass in the proper cluster-admin credentials and to create the ImageStreams in the 'openshift' namespace:
 
     oc new-app openshift/templates/django.json -p SOURCE_REPOSITORY_URL=<your repository location>
 
@@ -120,7 +122,7 @@ Templates give you full control of each component of your application.
 Sometimes your application is simple enough and you don't want to bother with templates. In that case, you can let OpenShift inspect your source code and create the required components automatically for you:
 
 ```bash
-$ oc new-app centos/python-35-centos7~https://github.com/openshift/django-ex
+$ oc new-app centos/python-35-centos7~https://github.com/sclorg/django-ex
 imageStreams/python-35-centos7
 imageStreams/django-ex
 buildConfigs/django-ex
@@ -218,7 +220,7 @@ Redeploy your application to have your changes applied, and open the welcome pag
 
 ## Looking for help
 
-If you get stuck at some point, or think that this document needs further details or clarification, you can give feedback and look for help using the channels mentioned in [the OpenShift Origin repo](https://github.com/openshift/origin), or by filing an issue.
+If you get stuck at some point, or think that this document needs further details or clarification, you can give feedback and look for help using the channels mentioned in [the OKD repo](https://github.com/openshift/origin), or by filing an issue.
 
 
 ## License
